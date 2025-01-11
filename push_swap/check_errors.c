@@ -105,7 +105,7 @@ char	**error_check(int argc, char **argv)
 	while (argv[i])
 	{
 		if (check_spaces(argv[i]))
-			return (NULL);
+			return (free(inputs), NULL);
 		inputs = other_strjoin(inputs, argv[i++]);
 		if (inputs == NULL)
 			return (free(inputs), NULL);

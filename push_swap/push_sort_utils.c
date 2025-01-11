@@ -3,22 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   push_sort_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/06 18:54:16 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/09 19:10:22 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/11 03:00:50 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+void	stack_inits(t_stack *stack_a, t_stack *stack_b)
+{
+		set_index(stack_a);
+		set_index(stack_b);
+		give_targets_a(stack_a, stack_b);
+		give_targets_b(stack_a, stack_b);
+		get_cost(stack_a, stack_b);
+		get_cost(stack_b, stack_a);
+}
+
 void	get_cost(t_stack *stack_a, t_stack *stack_b)
 {
 	t_node	*temp_a;
-	t_node	*temp_b;
 
 	temp_a = stack_a->head;
-	temp_b = stack_b->head;
 	while(temp_a)
 	{
 		if(temp_a->index > stack_a->size / 2)
@@ -31,6 +39,16 @@ void	get_cost(t_stack *stack_a, t_stack *stack_b)
 			temp_a->cost += temp_a->target->index;
 		temp_a = temp_a->next;
 	}
+	temp_a = stack_a->head;
+    while (temp_a)
+    {
+        if ((temp_a->index > stack_a->size / 2 && temp_a->target->index > \
+			 stack_b->size / 2) ||
+            (temp_a->index <= stack_a->size / 2 && temp_a->target->index <= \
+			 stack_b->size / 2)) 
+            temp_a->cost -= 1;
+        temp_a = temp_a->next;
+    }
 }
 
 t_node	*find_cheapest(t_stack *stack)
@@ -54,31 +72,75 @@ t_node	*find_cheapest(t_stack *stack)
 	return(best_index);
 }
 
+bool	check_double_rotate(t_stack *stack_a, t_stack *stack_b, t_node *small)
+{
+	if(small != stack_a->head && small->target != stack_b->head)
+	{
+		if(small->index > stack_a->size / 2 && \
+		small->target->index > stack_b->size / 2)
+		{
+			double_reverse_rotate(stack_a, stack_b);
+			return(true);
+		}
+		if(small->index < stack_a->size / 2 && \
+		small->target->index < stack_b->size / 2)
+		{
+			double_rotate(stack_a, stack_b);
+			return(true);
+		}
+	}
+	return (false);
+}
+
 void	make_push_b(t_stack *stack_a, t_stack *stack_b)
 {
 	t_node	*cheap_a;
-	t_node	*target_a;
 
 	cheap_a = find_cheapest(stack_a);
-	target_a = cheap_a->target;
-	if(cheap_a->cost == 0)
+	while(cheap_a != stack_a->head || cheap_a->target != stack_b->head)
 	{
-		push(stack_a, stack_b, 'b');
-		return ;
+		check_double_rotate(stack_a,stack_b,cheap_a);
+		if(cheap_a != stack_a->head)
+		{
+			if(cheap_a->index > stack_a->size / 2)
+				reverse_rotate(stack_a, 'a', true);
+			else
+				rotate(stack_a, 'a', true);
+		}
+		if(cheap_a->target != stack_b->head)
+		{
+			if(cheap_a->target->index > stack_b->size / 2)
+				reverse_rotate(stack_b, 'b', true);
+			else
+				rotate(stack_b, 'b', true);
+		}
 	}
-	while(cheap_a != stack_a->head)
-	{
-		if(cheap_a->index > stack_a->size / 2)
-			reverse_rotate(stack_a, 'a');
-		else
-			rotate(stack_a, 'a', true);
-	}
-	while(cheap_a->target != stack_b->head)
-	{
-		if(cheap_a->target->index > stack_a->size / 2)
-			reverse_rotate(stack_b, 'b');
-		else
-			rotate(stack_b, 'b', true);
-	}
+
 	push(stack_a, stack_b, 'b');
+}
+
+void	make_push_a(t_stack *stack_a, t_stack *stack_b)
+{
+	t_node	*cheap_b;
+
+	cheap_b = find_cheapest(stack_b);
+	while(cheap_b != stack_b->head || cheap_b->target != stack_a->head)
+	{
+		check_double_rotate(stack_b, stack_a, cheap_b);
+		if(cheap_b != stack_b->head)
+		{
+			if(cheap_b->index > stack_b->size / 2)
+				reverse_rotate(stack_b, 'b',true);
+			else
+				rotate(stack_b, 'b', true);
+		}
+		if(cheap_b->target != stack_a->head)
+		{
+			if(cheap_b->target->index > stack_a->size / 2)
+				reverse_rotate(stack_a, 'a', true);
+			else
+				rotate(stack_a, 'a', true);
+		}
+	}
+	push(stack_b, stack_a, 'a');
 }

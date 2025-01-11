@@ -14,10 +14,8 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int				i;
 	unsigned char	*p;
 
-	i = 0;
 	if (nmemb != 0 && size > (size_t)(-1) / nmemb)
 		return (NULL);
 	p = malloc(nmemb * size);
@@ -26,22 +24,22 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	ft_bzero(p, nmemb * size);
 	return (p);
 }
-/*
+
 int	main(void)
 {
 	int	*array;
 	int	i;
-	int	num_elements = -5; 
+	int	num_elements = 5; 
 
 	array = calloc(num_elements, sizeof(int));
 	i = 0;
+	write(1, "test", 4);
 	while (i < num_elements)
 	{
 		printf("%d ", array[i]);
 		i++;
 	}
-	printf("\n");
+	printf("aettge\n");
 	free(array);
 	return (0);
 }
-*/

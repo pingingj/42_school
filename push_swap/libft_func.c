@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:52:41 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/03 19:41:06 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/13 00:29:16 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*other_strjoin(char *s1, char const *s2)
 	j = 0;
 	joined = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) * sizeof(char) + 1);
 	if (joined == NULL)
-		return (NULL);
+		return (free(s1), NULL);
 	while (++i < ft_strlen(s1))
 		joined[i] = s1[i];
 	while (s2[j] != '\0')
@@ -68,4 +68,22 @@ long	ft_atol(const char *nptr)
 		i++;
 	}
 	return (result * minus);
+}
+
+void	double_rotate(t_stack *stack_a, t_stack *stack_b)
+{
+	if(stack_a->size <= 1 && stack_b->size <= 1)
+		return ;
+	rotate(stack_a, 'a', false);
+	rotate(stack_b, 'b', false);
+	ft_printf("rr\n");
+}
+
+void	double_reverse_rotate(t_stack *stack_a, t_stack *stack_b)
+{
+	if(stack_a->size <= 1 && stack_b->size <= 1)
+		return ;
+	reverse_rotate(stack_a, 'a', false);
+	reverse_rotate(stack_b, 'b', false);
+	ft_printf("rrr\n");
 }

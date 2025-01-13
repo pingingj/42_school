@@ -6,11 +6,26 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:38:44 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/11 02:03:43 by root             ###   ########.fr       */
+/*   Updated: 2025/01/13 00:13:54 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+bool	sort_check(t_stack *stack)
+{
+	t_node	*temp;
+
+	temp = stack->head;
+	while (temp->next)
+	{
+		if (temp->data < temp->next->data)
+			temp = temp->next;
+		else
+			return (false);
+	}
+	return (true);
+}
 
 t_stack	*make_stack(char **strings)
 {
@@ -50,12 +65,14 @@ int	main(int argc, char **argv)
 		if (stack_a == NULL)
 			free_split(strings);
 		stack_b = make_stack(NULL);
-		sort_stacks(stack_a, stack_b);
+		if(!sort_check(stack_a))
+			sort_stacks(stack_a, stack_b);
 		clear_stack(stack_a);
 		clear_stack(stack_b);
 		free_split(strings);
 		return (0);
 	}
-	ft_printf("Error\n");
+	if(argc != 1)
+		ft_printf("Error\n");
 	return (1);
 }

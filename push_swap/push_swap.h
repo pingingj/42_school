@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 19:40:03 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/11 01:34:19 by root             ###   ########.fr       */
+/*   Updated: 2025/01/13 00:00:57 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void				give_targets_a(t_stack *stack_a, t_stack *stack_b);
 void				give_targets_b(t_stack *stack_a, t_stack *stack_b);
 void				set_index(t_stack *stack);
 void				get_cost(t_stack *stack_a, t_stack *stack_b);
-t_node				*find_cheapest(t_stack *stack);
-void				stack_inits(t_stack *stack_a, t_stack *stack_b);
 void				make_push_b(t_stack *stack_a, t_stack *stack_b);
 void				make_push_a(t_stack *stack_a, t_stack *stack_b);
 

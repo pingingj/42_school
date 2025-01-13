@@ -6,29 +6,11 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:33:09 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/11 02:27:58 by root             ###   ########.fr       */
+/*   Updated: 2025/01/12 23:18:55 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void	double_rotate(t_stack *stack_a, t_stack *stack_b)
-{
-	if(stack_a->size <= 1 && stack_b->size <= 1)
-		return ;
-	rotate(stack_a, 'a', false);
-	rotate(stack_b, 'b', false);
-	ft_printf("rr\n");
-}
-
-void	double_reverse_rotate(t_stack *stack_a, t_stack *stack_b)
-{
-	if(stack_a->size <= 1 && stack_b->size <= 1)
-		return ;
-	reverse_rotate(stack_a, 'a', false);
-	reverse_rotate(stack_b, 'b', false);
-	ft_printf("rrr\n");
-}
 
 void	push(t_stack *stack_1, t_stack *stack_2, char which)
 {

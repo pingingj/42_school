@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:49:17 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/09 19:09:57 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/12 23:50:44 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	set_index(t_stack *stack)
+{
+	int	i;
+	t_node *temp;
+
+	i = 0;
+	temp = stack->head;
+	while(temp)
+	{
+		temp->index = i;
+		temp = temp->next;
+		i++;
+	}
+}
 
 t_node	*biggest_node(t_stack *stack)
 {
@@ -106,20 +121,5 @@ void	give_targets_b(t_stack *stack_a, t_stack *stack_b)
 		if (value == LONG_MAX)
 			temp_b->target = smallest_node(stack_a);
 		temp_b = temp_b->next;
-	}
-}
-
-void	set_index(t_stack *stack)
-{
-	int	i;
-	t_node *temp;
-
-	i = 0;
-	temp = stack->head;
-	while(temp)
-	{
-		temp->index = i;
-		temp = temp->next;
-		i++;
 	}
 }

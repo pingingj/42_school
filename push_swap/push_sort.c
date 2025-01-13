@@ -6,25 +6,20 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:45:18 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/11 01:28:30 by root             ###   ########.fr       */
+/*   Updated: 2025/01/12 23:43:03 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-bool	sort_check(t_stack *stack)
+static void	stack_inits(t_stack *stack_a, t_stack *stack_b)
 {
-	t_node	*temp;
-
-	temp = stack->head;
-	while (temp->next)
-	{
-		if (temp->data < temp->next->data)
-			temp = temp->next;
-		else
-			return (false);
-	}
-	return (true);
+		set_index(stack_a);
+		set_index(stack_b);
+		give_targets_a(stack_a, stack_b);
+		give_targets_b(stack_a, stack_b);
+		get_cost(stack_a, stack_b);
+		get_cost(stack_b, stack_a);
 }
 
 static void	small_cases(t_stack *stack)

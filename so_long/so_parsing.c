@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:41:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/14 20:15:08 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:33:57 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,35 @@ bool	get_player(t_map *map)
 	return (true);
 }
 
+bool	get_exit(t_map *map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	map->exit.pos.exists = false;
+	while (i < map->pos.y)
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == 'E')
+			{
+				if (map->exit.pos.exists == true)
+					return (false);
+				map->exit.pos.x = j;
+				map->exit.pos.y = i;
+				map->exit.pos.exists = true;
+			}
+			j++;
+		}
+		i++;
+	}
+	if (map->exit.pos.exists == false)
+		return (false);
+	return (true);
+}
+
 bool	get_collectible(t_map *map)
 {
 	int	i;
@@ -94,6 +123,8 @@ bool	get_collectible(t_map *map)
 		return (false);
 	return (true);
 }
+
+
 
 void	print_map(t_map map)
 {
@@ -128,10 +159,9 @@ int	main(void)
 {
 	int fd;
 	t_map *map;
-
 	fd = open("map.txt", O_RDONLY);
 	map = make_map(fd);
-	if (!get_player(map) || !get_collectible(map))
+	if (!get_player(map) || !get_collectible(map) || !get_exit(map))
 	{
 		ft_printf("Error\n");
 		free_map(map);

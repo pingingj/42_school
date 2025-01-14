@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:42:05 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/14 20:15:13 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/14 20:34:04 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_map
 {
 	char		**map;
 
+	t_exit		exit;
 	t_player	player;
 	t_collect	collectible;
 	t_pos		pos;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/03 17:49:17 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/12 23:50:44 by root             ###   ########.fr       */
+/*   Updated: 2025/01/13 13:44:50 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 void	set_index(t_stack *stack)
 {
-	int	i;
-	t_node *temp;
+	int		i;
+	t_node	*temp;
 
 	i = 0;
 	temp = stack->head;
-	while(temp)
+	while (temp)
 	{
 		temp->index = i;
 		temp = temp->next;
@@ -68,7 +68,6 @@ t_node	*smallest_node(t_stack *stack)
 		}
 		temp = temp->next;
 	}
-
 	return (big);
 }
 

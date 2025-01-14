@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/18 17:45:18 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/12 23:43:03 by root             ###   ########.fr       */
+/*   Updated: 2025/01/13 13:39:32 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 static void	stack_inits(t_stack *stack_a, t_stack *stack_b)
 {
-		set_index(stack_a);
-		set_index(stack_b);
-		give_targets_a(stack_a, stack_b);
-		give_targets_b(stack_a, stack_b);
-		get_cost(stack_a, stack_b);
-		get_cost(stack_b, stack_a);
+	set_index(stack_a);
+	set_index(stack_b);
+	give_targets_a(stack_a, stack_b);
+	give_targets_b(stack_a, stack_b);
+	get_cost(stack_a, stack_b);
+	get_cost(stack_b, stack_a);
 }
 
 static void	small_cases(t_stack *stack)
@@ -63,15 +63,15 @@ static void	sort_small(t_stack *stack)
 	small_cases(stack);
 }
 
-static	void	last_rotate(t_stack *stack_a)
+static void	last_rotate(t_stack *stack_a)
 {
-	t_node *smallest;
+	t_node	*smallest;
 
 	set_index(stack_a);
 	smallest = smallest_node(stack_a);
-	while(smallest != stack_a->head)
+	while (smallest != stack_a->head)
 	{
-		if(smallest->index > stack_a->size / 2)
+		if (smallest->index > stack_a->size / 2)
 			reverse_rotate(stack_a, 'a', true);
 		else
 			rotate(stack_a, 'a', true);
@@ -91,13 +91,13 @@ void	sort_stacks(t_stack *stack_a, t_stack *stack_b)
 	while (!sort_check(stack_a) && stack_a->size > 3)
 	{
 		stack_inits(stack_a, stack_b);
- 		make_push_b(stack_a, stack_b); 
+		make_push_b(stack_a, stack_b);
 	}
 	sort_small(stack_a);
 	while (stack_b->size != 0)
 	{
 		stack_inits(stack_a, stack_b);
- 		make_push_a(stack_a, stack_b); 
+		make_push_a(stack_a, stack_b);
 	}
 	last_rotate(stack_a);
 	return ;

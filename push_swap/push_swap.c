@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 18:38:44 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/13 00:13:54 by root             ###   ########.fr       */
+/*   Updated: 2025/01/13 13:44:36 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ t_stack	*make_stack(char **strings)
 
 int	main(int argc, char **argv)
 {
-	char **strings;
-	t_stack *stack_a;
-	t_stack *stack_b;
+	char	**strings;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 
 	strings = error_check(argc, argv);
 	if (strings != NULL)
@@ -65,14 +65,14 @@ int	main(int argc, char **argv)
 		if (stack_a == NULL)
 			free_split(strings);
 		stack_b = make_stack(NULL);
-		if(!sort_check(stack_a))
+		if (!sort_check(stack_a))
 			sort_stacks(stack_a, stack_b);
 		clear_stack(stack_a);
 		clear_stack(stack_b);
 		free_split(strings);
 		return (0);
 	}
-	if(argc != 1)
+	if (argc != 1)
 		ft_printf("Error\n");
 	return (1);
 }

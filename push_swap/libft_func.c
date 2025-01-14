@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:52:41 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/13 00:29:16 by root             ###   ########.fr       */
+/*   Updated: 2025/01/14 20:12:46 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ long	ft_atol(const char *nptr)
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 	{
 		result = result * 10 + (nptr[i] - '0');
+		if (result > INT_MAX)
+			break ;
 		i++;
 	}
 	return (result * minus);
@@ -72,7 +74,7 @@ long	ft_atol(const char *nptr)
 
 void	double_rotate(t_stack *stack_a, t_stack *stack_b)
 {
-	if(stack_a->size <= 1 && stack_b->size <= 1)
+	if (stack_a->size <= 1 && stack_b->size <= 1)
 		return ;
 	rotate(stack_a, 'a', false);
 	rotate(stack_b, 'b', false);
@@ -81,7 +83,7 @@ void	double_rotate(t_stack *stack_a, t_stack *stack_b)
 
 void	double_reverse_rotate(t_stack *stack_a, t_stack *stack_b)
 {
-	if(stack_a->size <= 1 && stack_b->size <= 1)
+	if (stack_a->size <= 1 && stack_b->size <= 1)
 		return ;
 	reverse_rotate(stack_a, 'a', false);
 	reverse_rotate(stack_b, 'b', false);

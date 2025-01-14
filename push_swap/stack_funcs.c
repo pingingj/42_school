@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_funcs.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 19:33:09 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/12 23:18:55 by root             ###   ########.fr       */
+/*   Updated: 2025/01/13 13:45:08 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	rotate(t_stack *stack, char which, bool print)
 {
 	if (stack->size <= 1)
 		return ;
-	if(print)
+	if (print)
 		ft_printf("r%c\n", which);
 	stack->head->prev = stack->tail;
 	stack->tail->next = stack->head;
@@ -55,7 +55,7 @@ void	reverse_rotate(t_stack *stack, char which, bool print)
 {
 	if (stack->size <= 1)
 		return ;
-	if(print)
+	if (print)
 		ft_printf("rr%c\n", which);
 	stack->tail->next = stack->head;
 	stack->head->prev = stack->tail;

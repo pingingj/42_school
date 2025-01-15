@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:06:33 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/14 20:20:36 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:12:48 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	ft_percent(const char *str, va_list args, int *length)
 	if (*str == 'x')
 		ft_putnbrbase(va_arg(args, unsigned int), "0123456789abcdef", length);
 	if (*str == 'X')
-		ft_putnbrbigbase(va_arg(args, unsigned int), "0123456789ABCDEF", length);
+		ft_putnbrbigbase(va_arg(args, unsigned int), "0123456789ABCDEF", \
+				length);
 	if (*str == 'p')
 	{
 		ptr = (unsigned long int)va_arg(args, void *);

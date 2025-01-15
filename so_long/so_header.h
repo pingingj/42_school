@@ -5,14 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 16:42:05 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/14 20:34:04 by dgarcez-         ###   ########.fr       */
+/*   Created: 2025/01/15 19:20:39 by dgarcez-          #+#    #+#             */
+/*   Updated: 2025/01/15 19:55:39 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SO_LONG_H
-
-# define SO_LONG_H
+#ifndef SO_HEADER_H
+# define SO_HEADER_H
 
 # include "libft/libft.h"
 # include <fcntl.h>
@@ -52,8 +51,15 @@ typedef struct s_map
 
 	t_exit		exit;
 	t_player	player;
-	t_collect	collectible;
+	t_collect	*collectible;
 	t_pos		pos;
 }				t_map;
 
+//----------------------------making map funcs-----------------------//
+bool			get_player(t_map *map);
+bool			get_exit(t_map *map);
+t_collect		*get_collectibles(int amount, t_map *map);
+t_collect		*make_collectible(t_map *map);
+void			print_map(t_map map);
+bool			check_map(t_map map);
 #endif

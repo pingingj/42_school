@@ -6,7 +6,7 @@
 #    By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/14 16:42:33 by dgarcez-          #+#    #+#              #
-#    Updated: 2025/01/14 17:04:50 by dgarcez-         ###   ########.fr        #
+#    Updated: 2025/01/15 19:27:48 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = so_long
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRCS =	so_parsing.c
+SRCS =	so_main.c so_parsing.c so_map_parsing.c
 
 OBJ_FILES =  $(SRCS:.c=.o)
 

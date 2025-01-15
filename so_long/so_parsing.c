@@ -5,41 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/14 16:41:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/14 20:33:57 by dgarcez-         ###   ########.fr       */
+/*   Created: 2025/01/15 19:09:16 by dgarcez-          #+#    #+#             */
+/*   Updated: 2025/01/15 19:55:58 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_header.h"
-
-t_map	*make_map(int fd)
-{
-	t_map	*map;
-	char	*temp;
-	int		i;
-
-	temp = "";
-	i = 0;
-	map = (t_map *)malloc(sizeof(t_map));
-	map->pos.x = 0;
-	map->pos.y = 0;
-	map->collectible.amount = 0;
-	while ((temp = get_next_line(fd)) != NULL)
-	{
-		map->pos.y++;
-		free(temp);
-	}
-	map->map = malloc(sizeof(char *) * map->pos.y);
-	close(fd);
-	fd = open("map.txt", O_RDONLY);
-	while (i < map->pos.y)
-	{
-		map->map[i] = get_next_line(fd);
-		i++;
-	}
-	map->pos.x = ft_strlen(map->map[0]);
-	return (map);
-}
 
 bool	get_player(t_map *map)
 {
@@ -99,11 +70,15 @@ bool	get_exit(t_map *map)
 	return (true);
 }
 
-bool	get_collectible(t_map *map)
+t_collect	*get_collectibles(int amount, t_map *map)
 {
-	int	i;
-	int	j;
+	t_collect	*collect;
+	int			i;
+	int			j;
+	int			index;
 
+	collect = malloc(sizeof(t_collect) * amount);
+	index = 0;
 	i = 0;
 	while (i < map->pos.y)
 	{
@@ -112,19 +87,44 @@ bool	get_collectible(t_map *map)
 		{
 			if (map->map[i][j] == 'C')
 			{
-				map->collectible.amount++;
-				map->collectible.collected = false;
+				collect[index].collected = false;
+				collect[index].pos.x = j;
+				collect[index].pos.y = i;
+				index++;
 			}
 			j++;
 		}
 		i++;
 	}
-	if (map->collectible.amount == 0)
-		return (false);
-	return (true);
+	return (collect);
 }
 
+t_collect	*make_collectible(t_map *map)
+{
+	int			i;
+	int			j;
+	t_collect	*collect;
+	int			amount;
 
+	amount = 0;
+	i = 0;
+	while (i < map->pos.y)
+	{
+		j = 0;
+		while (map->map[i][j])
+		{
+			if (map->map[i][j] == 'C')
+				amount++;
+			j++;
+		}
+		i++;
+	}
+	if (amount == 0)
+		return (NULL);
+	collect = get_collectibles(amount, map);
+	collect->amount = amount;
+	return (collect);
+}
 
 void	print_map(t_map map)
 {
@@ -137,37 +137,14 @@ void	print_map(t_map map)
 		i++;
 	}
 	printf("\nX = %d Y = %d\n", map.pos.x, map.pos.y);
-	printf("PLAYER positions X = %d, Y = %d\n", map.player.pos.x, \
-			map.player.pos.y);
-}
-
-void	free_map(t_map *map)
-{
-	int	i;
-
+	printf("PLAYER positions X = %d, Y = %d\n", map.player.pos.x,
+		map.player.pos.y);
 	i = 0;
-	while (i < map->pos.y)
+	while (i < map.collectible->amount)
 	{
-		free(map->map[i]);
+		printf("COLLECTIBLE positions i = %d, X = %d, Y = %d\n", i,
+			map.collectible[i].pos.x, map.collectible[i].pos.y);
 		i++;
 	}
-	free(map->map);
-	free(map);
-}
-
-int	main(void)
-{
-	int fd;
-	t_map *map;
-	fd = open("map.txt", O_RDONLY);
-	map = make_map(fd);
-	if (!get_player(map) || !get_collectible(map) || !get_exit(map))
-	{
-		ft_printf("Error\n");
-		free_map(map);
-		return (1);
-	}
-	print_map(*map);
-	free_map(map);
-	return (0);
+	printf("EXIT position: X = %d, Y = %d\n", map.exit.pos.x, map.exit.pos.y);
 }

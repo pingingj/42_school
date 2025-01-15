@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/29 16:37:18 by dgarcez-          #+#    #+#             */
-/*   Updated: 2024/11/04 17:45:52 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/15 19:13:02 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,10 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-int	main(void)
+/* int	main(void)
 {
 	char	*result;
 
 	result = ft_itoa(0);
 	printf("%s", result);
-}
-
+} */

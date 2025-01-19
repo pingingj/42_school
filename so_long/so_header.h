@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:20:39 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/15 19:55:39 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/17 14:54:05 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,6 @@ t_collect		*get_collectibles(int amount, t_map *map);
 t_collect		*make_collectible(t_map *map);
 void			print_map(t_map map);
 bool			check_map(t_map map);
+void			flood_map(t_map	*map, int	x, int	y);
+bool			check_flood(t_map map);
 #endif

@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:41:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/15 19:55:24 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/19 16:33:53 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_map	*make_map(int fd)
 	}
 	map->map = malloc(sizeof(char *) * map->pos.y);
 	close(fd);
-	fd = open("map.txt", O_RDONLY);
+	fd = open("map.ber", O_RDONLY);
 	while (i < map->pos.y)
 	{
 		map->map[i] = get_next_line(fd);
@@ -61,7 +61,7 @@ int	main(void)
 	int		fd;
 	t_map	*map;
 
-	fd = open("map.txt", O_RDONLY);
+	fd = open("map.ber", O_RDONLY);
 	map = make_map(fd);
 	map->collectible = make_collectible(map);
 	if (!get_player(map) || map->collectible == NULL || !get_exit(map) \
@@ -72,6 +72,10 @@ int	main(void)
 		return (1);
 	}
 	print_map(*map);
+	flood_map(map, map->player.pos.x, map->player.pos.y);
+	print_map(*map);
+	if(!check_flood(*map))
+		ft_printf("Error\n");
 	free_map(map);
 	return (0);
 }

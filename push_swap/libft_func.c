@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 11:52:41 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/14 20:35:02 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/16 02:08:19 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,5 @@ void	double_reverse_rotate(t_stack *stack_a, t_stack *stack_b)
 		return ;
 	reverse_rotate(stack_a, 'a', false);
 	reverse_rotate(stack_b, 'b', false);
+	ft_printf("rrr\n");
 }

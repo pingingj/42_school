@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_map_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:28:01 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/17 14:58:53 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/30 14:14:01 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static bool	check_boarders(t_map map)
 	return (true);
 }
 
-void	flood_map(t_map *map, int x, int y)
+static void	flood_map(t_map *map, int x, int y)
 {
 	if (map->map[y][x] == '1' || map->map[y][x] == 'o' || map->map[y][x] == 'e'
 		|| map->map[y][x] == 'c')
@@ -59,7 +59,7 @@ void	flood_map(t_map *map, int x, int y)
 	return ;
 }
 
-bool	check_flood(t_map map)
+static bool	check_flood(t_map map)
 {
 	int	i;
 
@@ -71,9 +71,31 @@ bool	check_flood(t_map map)
 		i++;
 	}
 	if (map.map[map.player.pos.y][map.player.pos.x] != 'p')
-			return (false);
+		return (false);
 	if (map.map[map.exit.pos.y][map.exit.pos.x] != 'e')
-			return (false);		
+		return (false);
+	return (true);
+}
+
+static bool	check_chars(t_map map)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map.pos.y)
+	{
+		j = 0;
+		while (map.map[i][j] && map.map[i][j] != '\n')
+		{
+			if (map.map[i][j] != '0' && map.map[i][j] != '1' && \
+			map.map[i][j] != 'P' && map.map[i][j] != 'E' && \
+			map.map[i][j] != 'C')
+				return (false);
+			j++;
+		}
+		i++;
+	}
 	return (true);
 }
 
@@ -94,7 +116,10 @@ bool	check_map(t_map map)
 			return (false);
 		i++;
 	}
-	if (!check_boarders(map))
+	if (!check_chars(map))
+		return (false);
+	flood_map(&map, map.player.pos.x, map.player.pos.y);
+	if (!check_boarders(map) || !check_flood(map))
 		return (false);
 	return (true);
 }

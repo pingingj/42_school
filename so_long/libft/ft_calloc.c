@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:13:51 by dgarcez-          #+#    #+#             */
-/*   Updated: 2024/11/01 12:26:19 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/30 12:16:47 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,8 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	int				i;
 	unsigned char	*p;
 
-	i = 0;
 	if (nmemb != 0 && size > (size_t)(-1) / nmemb)
 		return (NULL);
 	p = malloc(nmemb * size);

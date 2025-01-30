@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_header.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:20:39 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/17 14:54:05 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:26:49 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdlib.h>
+# include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx_int.h"
+
+typedef struct	s_data {
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
 
 typedef struct s_pos
 {
@@ -62,6 +72,4 @@ t_collect		*get_collectibles(int amount, t_map *map);
 t_collect		*make_collectible(t_map *map);
 void			print_map(t_map map);
 bool			check_map(t_map map);
-void			flood_map(t_map	*map, int	x, int	y);
-bool			check_flood(t_map map);
 #endif

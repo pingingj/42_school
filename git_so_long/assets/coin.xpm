@@ -1,10 +1,8 @@
 /* XPM */
-static char *de47fb5e43384c8dcd9c9f2ab73c4febYUYkL6U6nskHdx22[] = {
-/* columns rows colors chars-per-pixel */
-"96 96 2 1 ",
-"  c black",
-". c white",
-/* pixels */
+static char * coin_xpm[] = {
+"96 96 2 1",
+" 	c #000000",
+".	c #FFFC1B",
 "                                                                                                ",
 "                                                                                                ",
 "                                                                                                ",
@@ -100,5 +98,4 @@ static char *de47fb5e43384c8dcd9c9f2ab73c4febYUYkL6U6nskHdx22[] = {
 "                                                                                                ",
 "                                                                                                ",
 "                                                                                                ",
-"                                                                                                "
-};
+"                                                                                                "};

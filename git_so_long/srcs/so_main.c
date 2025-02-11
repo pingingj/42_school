@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:41:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/02/10 17:53:05 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/02/11 00:17:39 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	**make_map(char *ber_file, int fd, t_mlx *mlx)
 		mlx->map[i] = get_next_line(fd);
 		i++;
 	}
-	mlx->pos.x = ft_strlen(mlx->map[0]);
+	mlx->pos.x = ft_strlen(mlx->map[0]) - 1;
 	return (mlx->map);
 }
 

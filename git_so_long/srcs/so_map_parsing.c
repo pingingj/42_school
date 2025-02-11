@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_map_parsing.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:28:01 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/02/10 17:53:26 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/02/11 00:32:23 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ bool	check_map(t_mlx map)
 	i = 0;
 	while (i < map.pos.y)
 	{
-		size = ft_strlen(map.map[i]);
-		if (map.map[i][size - 1] != '\n')
+		size = ft_strlen(map.map[i]) - 1;
+		if (map.map[i][size] != '\n')
 			size++;
 		if (temp_x != size)
 			return (false);

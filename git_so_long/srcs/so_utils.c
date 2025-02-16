@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:41:58 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/02/10 17:54:30 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/02/16 21:50:17 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,22 @@ int	pixel_get(t_img *data, int x, int y)
 
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	return (*(unsigned int *)dst);
+}
+
+void	img_init(t_mlx *mlx, char *filename, t_img *img)
+{
+	img->img = mlx_xpm_file_to_image(mlx->mlx,
+		filename, &img.bits_per_pixel,
+		&img.line_length);
+	if(img->img == NULL)
+	{
+		ft_printf("Error\n Unable to load image");
+		exit(0);
+	}
+	img.addr = mlx_get_data_addr(img->img,
+		&img.bits_per_pixel,
+		&img.line_length,
+		&img.endian);
 }
 
 void	set_imgs(t_mlx *mlx)

@@ -6,7 +6,7 @@
 #    By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/14 16:42:33 by dgarcez-          #+#    #+#              #
-#    Updated: 2025/02/10 17:55:23 by dgarcez-         ###   ########.fr        #
+#    Updated: 2025/02/17 17:35:56 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 MLXFLAGS = -L ./minilibx_linux -Imlx_linux -lX11 -lXext
 
-SOURCES =	so_main.c so_parsing.c so_map_parsing.c so_utils.c so_clean.c so_events.c so_map_making.c
+SOURCES =	so_main.c so_parsing.c so_map_parsing.c so_utils.c \
+			so_clean.c so_events.c so_map_making.c so_animations.c so_image_initialization.c
 SRCS_DIR = srcs
 SRCS =	$(addprefix $(SRCS_DIR)/, $(SOURCES))
 
@@ -44,11 +45,14 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
 map1: all
-	./$(NAME) maps/map1.ber
+	@./$(NAME) maps/map1.ber
 
 map2: all
-	./$(NAME) maps/map2.ber
+	@./$(NAME) maps/map2.ber
 
+
+map3: all
+	@./$(NAME) maps/map3.ber
 
 clean:
 	make clean -C ./incs/libft -s

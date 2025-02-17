@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:09:16 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/02/10 17:54:03 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/02/12 20:06:17 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,13 +99,20 @@ void	print_map(t_mlx map)
 	i = 0;
 	while (i < map.pos.y)
 	{
-		printf("i = %d %s", i, map.map[i]);
+		ft_printf("i = %d %s", i, map.map[i]);
 		i++;
 	}
-	printf("\nX = %d Y = %d\n", map.pos.x, map.pos.y);
-	printf("PLAYER positions X = %d, Y = %d\n", map.player.pos.x,
+	ft_printf("\nX = %d Y = %d\n", map.pos.x, map.pos.y);
+	ft_printf("PLAYER positions X = %d, Y = %d\n", map.player.pos.x,
 		map.player.pos.y);
 	i = 0;
+	while (i < map.c_amount)
+	{
+		ft_printf("coins positions %d = %d, %d\n",
+			i, map.coin_pos[i].x, map.coin_pos[i].y);
+		i++;
+	}
 	ft_printf("COLLETIBLE AMOUNT = %d\n", map.c_amount);
-	printf("EXIT position: X = %d, Y = %d\n", map.exit.pos.x, map.exit.pos.y);
+	ft_printf("EXIT position: X = %d, Y = %d\n",
+		map.exit.pos.x, map.exit.pos.y);
 }

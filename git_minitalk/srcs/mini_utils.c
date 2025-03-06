@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   mini_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/24 11:40:24 by root              #+#    #+#             */
-/*   Updated: 2025/03/05 00:05:57 by dgarcez-         ###   ########.fr       */
+/*   Created: 2025/03/06 15:26:41 by dgarcez-          #+#    #+#             */
+/*   Updated: 2025/03/06 15:27:10 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../incs/minitalk.h"
 
-# include "../incs/libft/libft.h"
-# include <signal.h>
-# include <sys/types.h>
-# include <unistd.h>
-
-void	kill_check(pid_t id, int signal);
-
-#endif
+void	kill_check(pid_t id, int signal)
+{
+	if (kill(id, signal) < 0)
+	{
+		perror("");
+		exit(1);
+	}
+}

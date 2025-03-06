@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
+#    By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/02/24 10:57:42 by root              #+#    #+#              #
-#    Updated: 2025/02/26 18:25:59 by root             ###   ########.fr        #
+#    Updated: 2025/03/06 15:37:20 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,51 +18,41 @@ LIBFT = ./incs/libft/libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SOURCES =	server.c
-CSOURCES =	client.c
-	
+SERVER_SOURCES = mini_server.c mini_utils.c
+CLIENT_SOURCES = mini_client.c mini_utils.c
+
 SRCS_DIR = srcs
-SRCS =	$(addprefix $(SRCS_DIR)/, $(SOURCES))
+OBJ_DIR = objs
 
-CSRCS_DIR = client_srcs
-CSRCS =	$(addprefix $(CSRCS_DIR)/, $(CSOURCES))
-
-OBJS_DIR = objs
-COBJS_DIR = cobjs
-
-OBJ_FILES =  $(addprefix $(OBJS_DIR)/, $(SOURCES:.c=.o))
-COBJ_FILES =  $(addprefix $(COBJS_DIR)/, $(CSOURCES:.c=.o))
+SERVER_OBJ = $(addprefix $(OBJ_DIR)/, $(SERVER_SOURCES:.c=.o))
+CLIENT_OBJ = $(addprefix $(OBJ_DIR)/, $(CLIENT_SOURCES:.c=.o))
 
 all: $(NAME) $(CNAME)
 
-$(NAME): $(OBJ_FILES) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJ_FILES) $(LIBFT) -o $(NAME)
+$(NAME): $(SERVER_OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) $(SERVER_OBJ) $(LIBFT) -o $(NAME)
+	
+$(CNAME): $(CLIENT_OBJ) $(LIBFT)
+	$(CC) $(CFLAGS) $(CLIENT_OBJ) $(LIBFT) -o $(CNAME)
 
-$(CNAME): $(COBJ_FILES) $(LIBFT)
-	$(CC) $(CFLAGS) $(COBJ_FILES) $(LIBFT) -o $(CNAME)
-
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
+$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(COBJS_DIR)/%.o: $(CSRCS_DIR)/%.c | $(COBJS_DIR)
+$(OBJ_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 $(LIBFT):
 	make -C ./incs/libft -s
-	
-$(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
-
-$(COBJS_DIR):
-	@mkdir -p $(COBJS_DIR)
 
 clean:
 	make clean -C ./incs/libft -s
-	@rm -rf $(OBJS_DIR)
-	@rm -rf $(COBJS_DIR)
+	@rm -rf $(OBJ_DIR)
 
 fclean: clean
 	make fclean -C ./incs/libft -s
-	rm -f $(NAME)
-	rm -f $(CNAME)
+	rm -f $(NAME) $(CNAME)
+
 re: fclean all

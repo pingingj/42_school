@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 16:41:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/02/19 19:06:04 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:34:27 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 char	**make_map(char *ber_file, int fd, t_game *game)
 {
 	char	*temp;
-	int		i;
 
-	i = 0;
 	game->pos.x = 0;
 	game->pos.y = 0;
 	temp = get_next_line(fd);
@@ -76,10 +74,10 @@ int	keys(int keycode, t_game *game)
 		game->player.dir = 0;
 	if (game->player.dir == 1)
 		mlx_put_image_to_window(game->mlx, game->win, game->player_mirror.img,
-			game->player.pos.x * 96, game->player.pos.y * 96);
+			game->player.pos.x * SPRITE_SZ, game->player.pos.y * SPRITE_SZ);
 	else
 		mlx_put_image_to_window(game->mlx, game->win, game->player.p_img.img,
-			game->player.pos.x * 96, game->player.pos.y * 96);
+			game->player.pos.x * SPRITE_SZ, game->player.pos.y * SPRITE_SZ);
 	ft_printf("moves done: %d\n", game->moves);
 	return (0);
 }
@@ -97,7 +95,7 @@ int	main(int argc, char **argv)
 	fd = open(argv[1], O_RDONLY);
 	game = parse(argv[1], fd);
 	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, game.pos.x * 96, game.pos.y * 96 + 152,
+	game.win = mlx_new_window(game.mlx, game.pos.x * SPRITE_SZ, game.pos.y * SPRITE_SZ + COUNTER_H,
 			"so_longing");
 	set_imgs(&game);
 	put_map(&game, game.map);

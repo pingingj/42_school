@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 20:11:46 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/02/19 17:54:59 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:34:06 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	set_num_imgs(t_game *game)
 
 void	set_imgs(t_game *game)
 {
-	game->bg_img.img = mlx_new_image(game->mlx, game->pos.x * 96, game->pos.y
-			* 96 + 216);
+	game->bg_img.img = mlx_new_image(game->mlx, game->pos.x * SPRITE_SZ, game->pos.y
+			* SPRITE_SZ + COUNTER_H);
 	game->bg_img.addr = mlx_get_data_addr(game->bg_img.img,
 			&game->bg_img.bits_per_pixel,
 			&game->bg_img.line_length,

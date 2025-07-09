@@ -6,7 +6,7 @@
 #    By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/14 16:42:33 by dgarcez-          #+#    #+#              #
-#    Updated: 2025/02/18 15:37:05 by dgarcez-         ###   ########.fr        #
+#    Updated: 2025/07/09 16:20:16 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ MLXFLAGS = -L ./minilibx_linux -Imlx_linux -lX11 -lXext
 
 SOURCES =	so_main.c so_parsing.c so_map_parsing.c so_utils.c \
 			so_clean.c so_events.c so_map_making.c so_animations.c so_image_initialization.c
+
 SRCS_DIR = srcs
 SRCS =	$(addprefix $(SRCS_DIR)/, $(SOURCES))
 
@@ -55,13 +56,11 @@ map3: all
 
 clean:
 	make clean -C ./incs/libft -s
-
 	make clean -C ./incs/minilibx-linux -s
 	@rm -rf $(OBJS_DIR)
 
 fclean: clean
 	make fclean -C ./incs/libft -s
-
 	rm -f $(NAME)
 
 re: fclean all

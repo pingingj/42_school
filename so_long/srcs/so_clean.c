@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 17:41:30 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/02/19 19:02:01 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:28:10 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,14 @@
 
 void	destroy_nums(t_game *game)
 {
-	mlx_destroy_image(game->mlx, game->nums[0].img);
-	mlx_destroy_image(game->mlx, game->nums[1].img);
-	mlx_destroy_image(game->mlx, game->nums[2].img);
-	mlx_destroy_image(game->mlx, game->nums[3].img);
-	mlx_destroy_image(game->mlx, game->nums[4].img);
-	mlx_destroy_image(game->mlx, game->nums[5].img);
-	mlx_destroy_image(game->mlx, game->nums[6].img);
-	mlx_destroy_image(game->mlx, game->nums[7].img);
-	mlx_destroy_image(game->mlx, game->nums[8].img);
-	mlx_destroy_image(game->mlx, game->nums[9].img);
+	int	i;
+
+	i = 0;
+	while (i <= 9)
+	{
+		mlx_destroy_image(game->mlx, game->nums[i].img);
+		i++;
+	}	
 }
 
 int	ft_destroy(t_game *game)
@@ -55,21 +53,21 @@ void	print_errors(t_game *game, int error)
 {
 	if (error == 1)
 		ft_printf("Error\nNo file provided");
-	if (error == 2)
+	else if (error == 2)
 		ft_printf("Error\nFile is not in the correct format");
-	if (error == 3)
+	else if (error == 3)
 		ft_printf("Error\nNo map provided Bruh\n");
-	if (error == 4)
+	else if (error == 4)
 	{
 		free_map(game);
 		ft_printf("Error\nInvalid Map\n");
 	}
-	if (error == 5)
+	else if (error == 5)
 	{
 		free_map(game);
 		ft_printf("Map, is too big\n");
 	}
-	if (error == 6)
+	else if (error == 6)
 	{
 		free_map(game);
 		ft_printf("Map, is too big\n");

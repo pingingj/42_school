@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 19:20:39 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/02/19 17:54:03 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:59:52 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # include <stddef.h>
 # include <stdlib.h>
 # include <sys/time.h>
+
+#define SPRITE_SZ 96
+#define COUNTER_H 152
+#define COUNTER_W 288
+#define NUM_H	  101
+#define NUM_W	  42
 
 typedef struct s_img
 {
@@ -93,7 +99,7 @@ int				make_collectible(t_game *map);
 void			print_map(t_game map);
 bool			check_map(t_game map);
 void			pixel_put(t_img *img, int x, int y, int color);
-int				pixel_get(t_img *data, int x, int y);
+unsigned int				pixel_get(t_img *data, int x, int y);
 void			print_errors(t_game *mlx, int error);
 
 //----------------------------map generation-------------------------//

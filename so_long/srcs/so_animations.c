@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 18:51:03 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/02/20 18:32:00 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:10:59 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,23 +44,23 @@ void	put_frame_aux(t_game *game, int index)
 	while (index < game->c_amount)
 	{
 		if (game->i == 1)
-			put_sprites(game, game->coin_pos[index].x * 96,
-				game->coin_pos[index].y * 96, &game->coins.coin);
+			put_sprites(game, game->coin_pos[index].x * SPRITE_SZ,
+				game->coin_pos[index].y * SPRITE_SZ, &game->coins.coin);
 		if (game->i == 100)
-			put_sprites(game, game->coin_pos[index].x * 96,
-				game->coin_pos[index].y * 96, &game->coins.first_coin);
+			put_sprites(game, game->coin_pos[index].x * SPRITE_SZ,
+				game->coin_pos[index].y * SPRITE_SZ, &game->coins.first_coin);
 		if (game->i == 200)
-			put_sprites(game, game->coin_pos[index].x * 96,
-				game->coin_pos[index].y * 96, &game->coins.second_coin);
+			put_sprites(game, game->coin_pos[index].x * SPRITE_SZ,
+				game->coin_pos[index].y * SPRITE_SZ, &game->coins.second_coin);
 		if (game->i == 300)
-			put_sprites(game, game->coin_pos[index].x * 96,
-				game->coin_pos[index].y * 96, &game->coins.third_coin);
+			put_sprites(game, game->coin_pos[index].x * SPRITE_SZ,
+				game->coin_pos[index].y * SPRITE_SZ, &game->coins.third_coin);
 		if (game->i == 400)
-			put_sprites(game, game->coin_pos[index].x * 96,
-				game->coin_pos[index].y * 96, &game->coins.fourth_coin);
+			put_sprites(game, game->coin_pos[index].x * SPRITE_SZ,
+				game->coin_pos[index].y * SPRITE_SZ, &game->coins.fourth_coin);
 		if (game->i == 500)
-			put_sprites(game, game->coin_pos[index].x * 96,
-				game->coin_pos[index].y * 96, &game->coins.last_coin);
+			put_sprites(game, game->coin_pos[index].x * SPRITE_SZ,
+				game->coin_pos[index].y * SPRITE_SZ, &game->coins.last_coin);
 		if (game->i == 600)
 			game->i = 0;
 		index++;
@@ -77,12 +77,12 @@ void	put_frame(t_game *game)
 		mlx_put_image_to_window(game->mlx, game->win, game->bg_img.img, 0, 0);
 		if (game->player.dir == 1)
 			mlx_put_image_to_window(game->mlx, game->win,
-				game->player_mirror.img, game->player.pos.x * 96,
-				game->player.pos.y * 96);
+				game->player_mirror.img, game->player.pos.x * SPRITE_SZ,
+				game->player.pos.y * SPRITE_SZ);
 		else
 			mlx_put_image_to_window(game->mlx, game->win,
-				game->player.p_img.img, game->player.pos.x * 96,
-				game->player.pos.y * 96);
+				game->player.p_img.img, game->player.pos.x * SPRITE_SZ,
+				game->player.pos.y * SPRITE_SZ);
 	}
 }
 

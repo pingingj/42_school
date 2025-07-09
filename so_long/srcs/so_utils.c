@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 17:41:58 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/02/19 17:52:50 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/07/09 16:59:33 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	pixel_put(t_img *img, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	pixel_get(t_img *data, int x, int y)
+unsigned int	pixel_get(t_img *data, int x, int y)
 {
 	char	*dst;
 

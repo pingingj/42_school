@@ -6,11 +6,30 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:16:12 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/06/16 20:37:20 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/07/18 23:15:56 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
+
+void	omega_free(t_table *table)
+{
+	if (table->ph && table->ph->philos)
+		free(table->ph->philos);
+	if (table->forks)
+		free(table->forks);
+	if (table->ph)
+		free(table->ph);
+	free(table);
+}
+void	exit_msg(t_table *table, char *which)
+{
+	if (which)
+		printf("%s\n", which);
+	if (table)
+		omega_free(table);
+	exit(1);
+}
 
 long	ft_atol(char *num)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 14:13:51 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/01/30 12:16:31 by root             ###   ########.fr       */
+/*   Updated: 2025/07/18 21:30:56 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,21 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	return (p);
 }
 
-int	main(void)
-{
-	int	*array;
-	int	i;
-	int	num_elements = 5; 
+// int	main(void)
+// {
+// 	int	*array;
+// 	int	i;
+// 	int	num_elements = 5; 
 
-	array = calloc(num_elements, sizeof(int));
-	i = 0;
-	write(1, "test", 4);
-	while (i < num_elements)
-	{
-		printf("%d ", array[i]);
-		i++;
-	}
-	printf("aettge\n");
-	free(array);
-	return (0);
-}
+// 	array = calloc(num_elements, sizeof(int));
+// 	i = 0;
+// 	write(1, "test", 4);
+// 	while (i < num_elements)
+// 	{
+// 		printf("%d ", array[i]);
+// 		i++;
+// 	}
+// 	printf("aettge\n");
+// 	free(array);
+// 	return (0);
+// }

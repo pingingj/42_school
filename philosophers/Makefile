@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+         #
+#    By: daniel <daniel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/16 15:53:23 by dgarcez-          #+#    #+#              #
-#    Updated: 2025/06/16 20:23:37 by dgarcez-         ###   ########.fr        #
+#    Updated: 2025/08/03 21:39:49 by daniel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SOURCES = philo.c utils.c
+SOURCES = philo.c creating.c utils.c
 
 SRCS_DIR = srcs
 SRCS =	$(addprefix $(SRCS_DIR)/, $(SOURCES))

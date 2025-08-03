@@ -3,81 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:56:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/07/18 23:41:07 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/08/03 22:29:35 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void    *printing(void *num)
+void	*monitor(void *ph)
 {
-    // long    *add;
-
-    // add = (long *) (num);
-    printf("lol the thread says omg and the num is %ld\n", *(long *)(num));
-    return (NULL);
-}
-
-static void	check_vars(t_table *table, char **argv)
-{
-	if (argv[5])
-	{
-		table->num_eat = ft_atol(argv[5]);
-		if (table->num_eat <= 0 || table->num_eat > INT_MAX)
-			exit_msg(table, "Invalid amount to eat");
-	}
-	if (table->num_philos <= 0 || table->num_philos > INT_MAX)
-		exit_msg(table, "Invalid amount of philosophers");
-	if (table->time_die <= 0 || table->time_die > INT_MAX)
-		exit_msg(table, "Invalid time to die");
-	if (table->time_eat <= 0 || table->time_eat > INT_MAX)
-		exit_msg(table, "Invalid time to eat");
-	if (table->time_sleep <= 0 || table->time_sleep > INT_MAX)
-		exit_msg(table, "Invalid time to sleep");
-}
-
-t_table	*making_table(char **argv)
-{
-	t_table	*table;
-
-	table = malloc(sizeof(t_table));
-	if (!table)
-		exit_msg(NULL, "Failed malloc making_table");
-	table->num_philos = ft_atol(argv[1]);
-	table->time_die = ft_atol(argv[2]);
-	table->time_eat = ft_atol(argv[3]);
-	table->time_sleep = ft_atol(argv[4]);
-	table->ph = NULL;
-	table->forks = NULL;
-	table->num_eat = -1;
-	table->sim_run = false;
-	check_vars(table, argv);
-	table->ph = malloc(sizeof(t_philo));
-	if (!table->ph)
-		exit_msg(table, "Failed malloc table->ph");
-	table->ph->philos = malloc(sizeof(pthread_t) * table->num_philos);
-	if (!table->ph->philos)
-		exit_msg(table, "Failed malloc table->ph->philos");
-	table->forks = malloc(sizeof(pthread_mutex_t) * table->num_philos);
-	if (!table->forks)
-		exit_msg(table, "Failed malloc table->forks");
-	return (table);
-}
-
-int	create_sim(t_table	*table)
-{
+	t_table *table;
+	bool	run;
 	int	i;
 
-	i = 0;
-	while(i < table->num_philos)
+	run = true;
+	table = (t_table *)ph;
+	while(1)
 	{
-		pthread_mutex_init(&table->forks[i], NULL);
-		i++;
+		i = 0;
+		while(i < table->num_philos)
+		{
+			pthread_mutex_lock(&table->last_meal_m);
+			if (get_time(table) - table->philos[i].last_meal > table->time_die)
+			{
+				table->sim_run = false;
+				run = false;
+			}
+			pthread_mutex_unlock(&table->last_meal_m);
+			if (run == false)
+				return (NULL);
+			i++;
+		}
 	}
-	return (1);
+}
+
+void    *routine(void *ph)
+{
+    t_philo *philo;
+	
+	philo = (t_philo *)ph;
+	while(1)
+	{
+		philo_msg(philo, THINK);
+		if (philo->id % 2 == 0)
+			pthread_mutex_lock(philo->left_f);
+		else
+			pthread_mutex_lock(philo->right_f);
+		philo_msg(philo, FORK);
+		if (philo->id % 2 == 0)
+			pthread_mutex_lock(philo->right_f);
+		else
+			pthread_mutex_lock(philo->left_f);
+		philo_msg(philo, FORK);
+		pthread_mutex_lock(&philo->table->last_meal_m);
+		philo->last_meal = get_time(philo->table);
+		pthread_mutex_unlock(&philo->table->last_meal_m);
+		philo_msg(philo, EAT);
+		usleep(philo->table->time_eat * 1000);
+		pthread_mutex_unlock(philo->left_f);
+		pthread_mutex_unlock(philo->right_f);
+		philo_msg(philo, SLEEP);
+		usleep(philo->table->time_sleep * 1000);
+	}
+	return (NULL);
 }
 
 int main(int argc, char **argv)
@@ -87,9 +77,11 @@ int main(int argc, char **argv)
 	table = NULL;
 	if (argc < 5 || argc > 6)
 		exit_msg(table, "Invalid amout of arguments");
-	table = making_table(argv);
+	table = create_table(argv);
 	if (table == NULL)
 		return (1);
-	printf("num philo = %ld\n", table->num_philos);
+	printf("num philo = %ld\ntime death = %ld\ntime eat = %ld\ntime sleep = %ld\nnum eat = %ld\n", table->num_philos, table->time_die, table->time_eat, table->time_sleep, table->num_eat);
+	create_philos(table);
+	start_routine(table);
 	omega_free(table);
 }

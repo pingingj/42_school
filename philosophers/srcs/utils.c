@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:16:12 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/07/18 23:15:56 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/08/03 21:42:54 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,45 @@
 
 void	omega_free(t_table *table)
 {
-	if (table->ph && table->ph->philos)
-		free(table->ph->philos);
+	if (table->philos)
+	free(table->philos);
 	if (table->forks)
-		free(table->forks);
-	if (table->ph)
-		free(table->ph);
+	free(table->forks);
 	free(table);
 }
 void	exit_msg(t_table *table, char *which)
 {
 	if (which)
-		printf("%s\n", which);
+	printf("%s\n", which);
 	if (table)
-		omega_free(table);
+	omega_free(table);
 	exit(1);
+}
+
+long	get_time(t_table *table)
+{
+	struct timeval time;
+	long	current_t;
+	gettimeofday(&time, NULL);
+	current_t = (time.tv_sec * 1000) + (time.tv_usec / 1000);
+	if (table->time_start == -1)
+		return (current_t);
+	else
+		return (current_t - table->time_start);
+}
+
+void	philo_msg(t_philo *philo, int msg_id)
+{
+	pthread_mutex_lock(&philo->table->print_m);
+	if (msg_id == 1)
+		printf("[%ld] Philosopher %d is thinking\n", get_time(philo->table), philo->id);
+	else if (msg_id == 2)
+		printf("[%ld] Philosopher %d picked up a fork\n", get_time(philo->table), philo->id);
+	else if (msg_id == 3)
+		printf("[%ld] Philosopher %d is eating\n", get_time(philo->table), philo->id);
+	else if (msg_id == 4)
+		printf("[%ld] Philosopher %d is sleeping\n", get_time(philo->table), philo->id);
+	pthread_mutex_unlock(&philo->table->print_m);
 }
 
 long	ft_atol(char *num)

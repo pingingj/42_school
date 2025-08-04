@@ -6,7 +6,7 @@
 /*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:16:12 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/03 21:42:54 by daniel           ###   ########.fr       */
+/*   Updated: 2025/08/04 21:28:44 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 void	omega_free(t_table *table)
 {
 	if (table->philos)
-	free(table->philos);
+		free(table->philos);
 	if (table->forks)
-	free(table->forks);
+		free(table->forks);
 	free(table);
 }
 void	exit_msg(t_table *table, char *which)
 {
 	if (which)
-	printf("%s\n", which);
+		printf("%s\n", which);
 	if (table)
-	omega_free(table);
+		omega_free(table);
 	exit(1);
 }
 
@@ -41,9 +41,17 @@ long	get_time(t_table *table)
 		return (current_t - table->time_start);
 }
 
-void	philo_msg(t_philo *philo, int msg_id)
+bool	philo_msg(t_philo *philo, int msg_id)
 {
 	pthread_mutex_lock(&philo->table->print_m);
+	pthread_mutex_lock(&philo->table->dead_m);
+	if (philo->table->sim_run == false)
+	{
+		pthread_mutex_unlock(&philo->table->dead_m);
+		pthread_mutex_unlock(&philo->table->print_m);
+		return (false);
+	}
+	pthread_mutex_unlock(&philo->table->dead_m);
 	if (msg_id == 1)
 		printf("[%ld] Philosopher %d is thinking\n", get_time(philo->table), philo->id);
 	else if (msg_id == 2)
@@ -53,6 +61,7 @@ void	philo_msg(t_philo *philo, int msg_id)
 	else if (msg_id == 4)
 		printf("[%ld] Philosopher %d is sleeping\n", get_time(philo->table), philo->id);
 	pthread_mutex_unlock(&philo->table->print_m);
+	return (true);
 }
 
 long	ft_atol(char *num)

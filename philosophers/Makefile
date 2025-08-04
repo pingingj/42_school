@@ -6,7 +6,7 @@
 #    By: daniel <daniel@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/16 15:53:23 by dgarcez-          #+#    #+#              #
-#    Updated: 2025/08/03 21:39:49 by daniel           ###   ########.fr        #
+#    Updated: 2025/08/04 15:24:54 by daniel           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = philo
 
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror -g -pthread
 
 SOURCES = philo.c creating.c utils.c
 

@@ -6,7 +6,7 @@
 /*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:16:41 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/03 22:06:02 by daniel           ###   ########.fr       */
+/*   Updated: 2025/08/04 15:04:13 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_table
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	last_meal_m;
 	pthread_mutex_t	print_m;
+	pthread_mutex_t	dead_m;
 	long			num_philos;
 	long			time_eat;
 	long			time_die;
@@ -68,7 +69,7 @@ void	start_routine(t_table *table);
 void    *routine(void *ph);
 void	*monitor(void *ph);
 long	get_time(t_table *table);
-void	philo_msg(t_philo *philo, int msg_id);
+bool	philo_msg(t_philo *philo, int msg_id);
 void	omega_free(t_table *table);
 void	exit_msg(t_table *table, char *which);
 

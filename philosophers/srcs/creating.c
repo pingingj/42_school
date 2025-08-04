@@ -6,7 +6,7 @@
 /*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 21:39:14 by daniel            #+#    #+#             */
-/*   Updated: 2025/08/03 22:32:37 by daniel           ###   ########.fr       */
+/*   Updated: 2025/08/04 15:38:52 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ int	create_philos(t_table *table)
 		exit_msg(table, "Mutex init failed");
 	if (pthread_mutex_init(&table->last_meal_m, NULL) != 0)
 		exit_msg(table, "Mutex init failed");
+	if (pthread_mutex_init(&table->dead_m, NULL) != 0)
+		exit_msg(table, "Mutex init failed");
 	table->time_start = get_time(table);
 	while(i < table->num_philos)
 	{
@@ -108,6 +110,15 @@ void	start_routine(t_table *table)
 	while (i < table->num_philos)
 	{
 		pthread_join(table->philos[i].thread, NULL);
+		i++;
+	}
+	pthread_mutex_destroy(&table->dead_m);
+	pthread_mutex_destroy(&table->last_meal_m);
+	pthread_mutex_destroy(&table->print_m);
+	i = 0;
+	while (i < table->num_philos)
+	{
+		pthread_mutex_destroy(&table->forks[i]);
 		i++;
 	}
 }

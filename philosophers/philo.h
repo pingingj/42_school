@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:16:41 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/04 15:04:13 by daniel           ###   ########.fr       */
+/*   Updated: 2025/08/06 13:37:20 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef struct s_philo
 {
 	int			id;
 	long		last_meal;
+	int			amount_eat;
 	pthread_mutex_t	*left_f;
 	pthread_mutex_t	*right_f;
 	pthread_t		thread;
@@ -53,6 +54,8 @@ typedef struct s_table
 	pthread_mutex_t	last_meal_m;
 	pthread_mutex_t	print_m;
 	pthread_mutex_t	dead_m;
+	pthread_mutex_t eat_m;
+	pthread_mutex_t full_m;
 	long			num_philos;
 	long			time_eat;
 	long			time_die;

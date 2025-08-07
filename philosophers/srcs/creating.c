@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creating.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 21:39:14 by daniel            #+#    #+#             */
-/*   Updated: 2025/08/04 15:38:52 by daniel           ###   ########.fr       */
+/*   Updated: 2025/08/07 15:20:04 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_table	*create_table(char **argv)
 	table->philos = NULL;
 	table->forks = NULL;
 	table->sim_run = false;
-	table->time_start = -1;
+	table->time_start = 0;
 	check_vars(table, argv);
 	table->philos = malloc(sizeof(t_philo) * table->num_philos);
 	if (!table->philos)
@@ -65,19 +65,22 @@ int	create_philos(t_table *table)
 
 	i = 0;
 	if (pthread_mutex_init(&table->print_m, NULL) != 0)
-		exit_msg(table, "Mutex init failed");
+		exit_msg(table, "Mutex init failed\n");
 	if (pthread_mutex_init(&table->last_meal_m, NULL) != 0)
-		exit_msg(table, "Mutex init failed");
+		exit_msg(table, "Mutex init failed\n");
+	if (pthread_mutex_init(&table->full_m, NULL) != 0)
+		exit_msg(table, "Mutex init failed\n");
 	if (pthread_mutex_init(&table->dead_m, NULL) != 0)
-		exit_msg(table, "Mutex init failed");
+		exit_msg(table, "Mutex init failed\n");
 	table->time_start = get_time(table);
 	while(i < table->num_philos)
 	{
-		table->philos[i].id = i;
+		table->philos[i].id = i + 1;
 		table->philos[i].last_meal = table->time_start;
+		table->philos[i].amount_eat = 0;
 		table->philos[i].table = table;
 		if (pthread_mutex_init(&table->forks[i], NULL) != 0)
-			exit_msg(table, "Mutex init failed");
+			exit_msg(table, "Mutex init failed\n");
 		i++;
 	}
 	i = 0;

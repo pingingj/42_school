@@ -3,18 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: daniel <daniel@student.42.fr>              +#+  +:+       +#+         #
+#    By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/16 15:53:23 by dgarcez-          #+#    #+#              #
-#    Updated: 2025/08/04 15:24:54 by daniel           ###   ########.fr        #
+#    Updated: 2025/08/07 15:12:18 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
-
+NAME = philosophers
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -pthread
+CFLAGS = -Wall -Wextra -Werror -g
 
 SOURCES = philo.c creating.c utils.c
 

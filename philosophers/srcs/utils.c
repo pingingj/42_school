@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:16:12 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/07 13:56:46 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/08/10 23:19:20 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ long	get_time(t_table *table)
 		return (current_t - table->time_start);
 }
 
-bool	philo_msg(t_philo *philo, int msg_id)
+bool	philo_msg(t_philo *philo, char *msg, int msg_id)
 {
 	pthread_mutex_lock(&philo->table->print_m);
 	pthread_mutex_lock(&philo->table->dead_m);
@@ -54,15 +54,19 @@ bool	philo_msg(t_philo *philo, int msg_id)
 		return (false);
 	}
 	pthread_mutex_unlock(&philo->table->dead_m);
-	if (msg_id == 1)
-		printf("%ld %d is thinking\n", get_time(philo->table), philo->id);
-	else if (msg_id == 2)
-		printf("%ld %d has taken a fork\n", get_time(philo->table), philo->id);
-	else if (msg_id == 3)
-		printf("%ld %d is eating\n", get_time(philo->table), philo->id);
-	else if (msg_id == 4)
-		printf("%ld %d is sleeping\n", get_time(philo->table), philo->id);
+	if (msg)
+		printf("%ld %d %s", get_time(philo->table), philo->id, msg);
 	pthread_mutex_unlock(&philo->table->print_m);
+	if (msg_id == EAT)
+		if (!sleep_philo(philo, philo->table->time_eat))
+			return (false);
+	if (msg_id == SLEEP)
+		if (!sleep_philo(philo, philo->table->time_sleep))
+			return (false);
+	if (msg_id == THINK)
+		if (philo->table->num_philos % 2 != 0)
+			if (!sleep_philo(philo, philo->table->time_eat * 2 - philo->table->time_sleep))
+				return (false);
 	return (true);
 }
 

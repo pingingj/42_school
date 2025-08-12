@@ -6,11 +6,11 @@
 #    By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/16 15:53:23 by dgarcez-          #+#    #+#              #
-#    Updated: 2025/08/07 15:12:18 by dgarcez-         ###   ########.fr        #
+#    Updated: 2025/08/12 17:19:36 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philosophers
+NAME = philo
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:16:12 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/10 23:19:20 by daniel           ###   ########.fr       */
+/*   Updated: 2025/08/12 17:31:38 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	omega_free(t_table *table)
 void	exit_msg(t_table *table, char *which)
 {
 	if (which)
-		while(which && *which)
+		while (which && *which)
 			write(2, which++, 1);
 	if (table)
 		omega_free(table);
@@ -33,8 +33,9 @@ void	exit_msg(t_table *table, char *which)
 
 long	get_time(t_table *table)
 {
-	struct timeval time;
-	long	current_t;
+	struct timeval	time;
+	long			current_t;
+
 	gettimeofday(&time, NULL);
 	current_t = (time.tv_sec * 1000) + (time.tv_usec / 1000);
 	if (!table)
@@ -65,7 +66,8 @@ bool	philo_msg(t_philo *philo, char *msg, int msg_id)
 			return (false);
 	if (msg_id == THINK)
 		if (philo->table->num_philos % 2 != 0)
-			if (!sleep_philo(philo, philo->table->time_eat * 2 - philo->table->time_sleep))
+			if (!sleep_philo(philo, philo->table->time_eat * 2
+					- philo->table->time_sleep))
 				return (false);
 	return (true);
 }
@@ -79,7 +81,7 @@ long	ft_atol(char *num)
 	sign = 1;
 	i = 0;
 	result = 0;
-	while(num[i] && (num[i] == ' ' || (num[i] >= 9 && num[i] <= 13)))
+	while (num[i] && (num[i] == ' ' || (num[i] >= 9 && num[i] <= 13)))
 		i++;
 	if (num[i] == '+' || num[i] == '-')
 	{
@@ -87,11 +89,11 @@ long	ft_atol(char *num)
 			sign = -1;
 		i++;
 	}
-	while(num[i] && (num[i] >= '0' && num[i] <= '9'))
+	while (num[i] && (num[i] >= '0' && num[i] <= '9'))
 	{
 		result = result * 10 + num[i] - '0';
 		if (result > INT_MAX)
-			break;
+			break ;
 		i++;
 	}
 	if (num[i] && (num[i] < '0' || num[i] > '9'))

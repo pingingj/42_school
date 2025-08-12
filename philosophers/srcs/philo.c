@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:56:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/11 00:15:18 by daniel           ###   ########.fr       */
+/*   Updated: 2025/08/12 17:34:46 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,18 @@ void	full_philo(t_table *table, bool *run, int i, int *full)
 
 void	*monitor(void *ph)
 {
-	t_table *table;
+	t_table	*table;
 	bool	run;
-	int	i;
-	int	full;
+	int		i;
+	int		full;
 
 	run = true;
 	table = (t_table *)ph;
-	while(1)
+	while (1)
 	{
 		full = 0;
 		i = 0;
-		while(i < table->num_philos)
+		while (i < table->num_philos)
 		{
 			dead_philo(table, &run, i);
 			full_philo(table, &run, i, &full);
@@ -73,22 +73,24 @@ bool	sleep_philo(t_philo *philo, long time_sleep)
 	long	start;
 	long	curr_time;
 	long	elapsed;
-	
+
+	if (time_sleep <= 0)
+		return (true);
 	start = get_time(philo->table);
 	curr_time = 0;
 	elapsed = 0;
-	while(elapsed < time_sleep)
+	while (elapsed < time_sleep)
 	{
-		usleep(100);
 		curr_time = get_time(philo->table);
 		elapsed = curr_time - start;
 		pthread_mutex_lock(&philo->table->dead_m);
 		if (philo->table->sim_run == false)
 		{
-			pthread_mutex_unlock(&philo->table->dead_m); 
+			pthread_mutex_unlock(&philo->table->dead_m);
 			return (false);
 		}
 		pthread_mutex_unlock(&philo->table->dead_m);
+		usleep(100);
 	}
 	return (true);
 }
@@ -102,6 +104,20 @@ bool	one_philo(t_philo *philo)
 		return (false);
 	}
 	return (true);
+}
+
+void	drop_forks(t_philo *philo)
+{
+	if (philo->id % 2 == 0)
+	{
+		pthread_mutex_unlock(philo->left_f);
+		pthread_mutex_unlock(philo->right_f);
+	}
+	else
+	{
+		pthread_mutex_unlock(philo->right_f);
+		pthread_mutex_unlock(philo->left_f);
+	}
 }
 
 static	bool	pick_forks(t_philo *philo)
@@ -126,8 +142,7 @@ static	bool	pick_forks(t_philo *philo)
 		pthread_mutex_lock(philo->left_f);
 	if (philo_msg(philo, "has taken a fork\n", FORK) == false)
 	{
-		pthread_mutex_unlock(philo->left_f);
-		pthread_mutex_unlock(philo->right_f);
+		drop_forks(philo);
 		return (false);
 	}
 	return (true);
@@ -143,12 +158,10 @@ bool	eating(t_philo *philo)
 	pthread_mutex_unlock(&philo->table->full_m);
 	if (philo_msg(philo, "is eating\n", EAT) == false)
 	{
-		pthread_mutex_unlock(philo->left_f);
-		pthread_mutex_unlock(philo->right_f);
+		drop_forks(philo);
 		return (false);
 	}
-	pthread_mutex_unlock(philo->left_f);
-	pthread_mutex_unlock(philo->right_f);
+	drop_forks(philo);
 	return (true);
 }
 

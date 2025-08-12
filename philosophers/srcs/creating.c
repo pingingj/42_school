@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creating.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 21:39:14 by daniel            #+#    #+#             */
-/*   Updated: 2025/08/10 20:48:23 by daniel           ###   ########.fr       */
+/*   Updated: 2025/08/12 17:31:47 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	create_philos(t_table *table)
 	if (pthread_mutex_init(&table->dead_m, NULL) != 0)
 		exit_msg(table, "Mutex init failed\n");
 	table->time_start = get_time(table);
-	while(i < table->num_philos)
+	while (i < table->num_philos)
 	{
 		table->philos[i].id = i + 1;
 		table->philos[i].last_meal = table->time_start;
@@ -84,7 +84,7 @@ int	create_philos(t_table *table)
 		i++;
 	}
 	i = 0;
-	while(i < table->num_philos)
+	while (i < table->num_philos)
 	{
 		table->philos[i].left_f = &table->forks[i];
 		table->philos[i].right_f = &table->forks[(i + 1) % table->num_philos];
@@ -95,17 +95,18 @@ int	create_philos(t_table *table)
 
 void	start_routine(t_table *table)
 {
-	int	i;
+	int			i;
 	pthread_t	tmonitor;
 
 	i = 0;
 	table->sim_run = true;
 	if (pthread_create(&tmonitor, NULL, monitor, table))
 		exit_msg(table, "Failed to create thread\n");
-	while(i < table->num_philos)
+	while (i < table->num_philos)
 	{
-		if (pthread_create(&table->philos[i].thread, NULL, routine, &table->philos[i]) != 0)
-        	exit_msg(table, "Failed to create thread\n");
+		if (pthread_create(&table->philos[i].thread, NULL, routine,
+				&table->philos[i]) != 0)
+			exit_msg(table, "Failed to create thread\n");
 		i++;
 	}
 	i = 0;

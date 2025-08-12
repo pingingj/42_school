@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:16:41 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/12 17:28:26 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/08/12 18:33:26 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ void				start_routine(t_table *table);
 void				*routine(void *ph);
 void				*monitor(void *ph);
 long				get_time(t_table *table);
+bool				one_philo(t_philo *philo);
+void				drop_forks(t_philo *philo);
 bool				philo_msg(t_philo *philo, char *msg, int msg_id);
 bool				sleep_philo(t_philo *philo, long time_sleep);
 void				omega_free(t_table *table);

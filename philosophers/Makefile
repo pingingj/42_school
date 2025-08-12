@@ -6,7 +6,7 @@
 #    By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/16 15:53:23 by dgarcez-          #+#    #+#              #
-#    Updated: 2025/08/12 17:19:36 by dgarcez-         ###   ########.fr        #
+#    Updated: 2025/08/12 18:32:52 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = philo
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 
-SOURCES = philo.c creating.c utils.c
+SOURCES = philo.c creating.c utils.c monitor.c philo_utils.c
 
 SRCS_DIR = srcs
 SRCS =	$(addprefix $(SRCS_DIR)/, $(SOURCES))

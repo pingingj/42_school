@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:16:41 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/12 18:57:29 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/08/13 01:42:21 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 # define EAT 3
 # define SLEEP 4
 
-// #define MALLOC_FAIL_PROBABILITY 4
+#define MALLOC_FAIL_PROBABILITY 4
 
-// static inline void *random_fail_malloc(size_t size) {
-//     if ((rand() % MALLOC_FAIL_PROBABILITY) == 0)
-//         return (NULL);
-//     return (malloc(size));
-// }
+static inline void *random_fail_malloc(size_t size) {
+    if ((rand() % MALLOC_FAIL_PROBABILITY) == 0)
+        return (NULL);
+    return (malloc(size));
+}
 
-// #define malloc(x) random_fail_malloc(x)
+#define malloc(x) random_fail_malloc(x)
 
 typedef struct s_philo
 {
@@ -77,7 +77,7 @@ bool				one_philo(t_philo *philo);
 void				drop_forks(t_philo *philo);
 bool				philo_msg(t_philo *philo, char *msg, int msg_id);
 bool				sleep_philo(t_philo *philo, long time_sleep);
-void				omega_free(t_table *table);
-void				exit_msg(t_table *table, char *which);
+void				omega_free(t_table *table, int destroy, int destroy_forks);
+void				exit_msg(t_table *table, char *which, int destroy, int destroy_forks);
 
 #endif

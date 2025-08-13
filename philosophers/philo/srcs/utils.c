@@ -3,17 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:16:12 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/12 19:26:28 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/08/13 01:46:21 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../philo.h"
 
-void	omega_free(t_table *table)
+void	omega_free(t_table *table, int destroy, int destroy_forks)
 {
+	int	i;
+
+	i = 0;
+	if (destroy >= 1)
+		pthread_mutex_destroy(&table->print_m);
+	if (destroy >= 2)
+		pthread_mutex_destroy(&table->last_meal_m);
+	if (destroy >= 3)
+		pthread_mutex_destroy(&table->full_m);
+	if (destroy >= 4)
+		pthread_mutex_destroy(&table->dead_m);
+	while(i < destroy_forks)
+	{
+		pthread_mutex_destroy(&table->forks[i]);
+		i++;
+	}
 	if (table && table->philos)
 		free(table->philos);
 	if (table && table->forks)
@@ -21,13 +37,13 @@ void	omega_free(t_table *table)
 	free(table);
 }
 
-void	exit_msg(t_table *table, char *which)
+void	exit_msg(t_table *table, char *which, int destroy, int	destroy_forks)
 {
 	if (which)
 		while (which && *which)
 			write(2, which++, 1);
 	if (table)
-		omega_free(table);
+		omega_free(table, destroy, destroy_forks);
 }
 
 long	get_time(t_table *table)

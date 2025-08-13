@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:56:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/12 18:56:39 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/08/13 02:10:52 by daniel           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ bool	sleep_philo(t_philo *philo, long time_sleep)
 	elapsed = 0;
 	while (elapsed < time_sleep)
 	{
+		usleep(100);
 		curr_time = get_time(philo->table);
 		elapsed = curr_time - start;
 		pthread_mutex_lock(&philo->table->dead_m);
@@ -34,7 +35,6 @@ bool	sleep_philo(t_philo *philo, long time_sleep)
 			return (false);
 		}
 		pthread_mutex_unlock(&philo->table->dead_m);
-		usleep(100);
 	}
 	return (true);
 }
@@ -111,7 +111,7 @@ int	main(int argc, char **argv)
 
 	table = NULL;
 	if (argc < 5 || argc > 6)
-		return (exit_msg(table, "Invalid amout of arguments\n"), 1);
+		return (exit_msg(table, "Invalid amout of arguments\n", 0, 0), 1);
 	table = create_table(argv);
 	if (table == NULL)
 		return (1);
@@ -119,5 +119,5 @@ int	main(int argc, char **argv)
 		return (1);
 	if (start_routine(table) == -1)
 		return (1);
-	omega_free(table);
+	omega_free(table, 4, table->num_philos);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 20:16:12 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/13 01:46:21 by daniel           ###   ########.fr       */
+/*   Updated: 2025/08/13 13:35:09 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	omega_free(t_table *table, int destroy, int destroy_forks)
 		pthread_mutex_destroy(&table->full_m);
 	if (destroy >= 4)
 		pthread_mutex_destroy(&table->dead_m);
-	while(i < destroy_forks)
+	while (i < destroy_forks)
 	{
 		pthread_mutex_destroy(&table->forks[i]);
 		i++;
@@ -37,7 +37,7 @@ void	omega_free(t_table *table, int destroy, int destroy_forks)
 	free(table);
 }
 
-void	exit_msg(t_table *table, char *which, int destroy, int	destroy_forks)
+void	exit_msg(t_table *table, char *which, int destroy, int destroy_forks)
 {
 	if (which)
 		while (which && *which)

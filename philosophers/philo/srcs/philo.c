@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 15:56:57 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/13 02:10:52 by daniel           ###   ########.fr       */
+/*   Updated: 2025/08/13 13:15:35 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ bool	sleep_philo(t_philo *philo, long time_sleep)
 	elapsed = 0;
 	while (elapsed < time_sleep)
 	{
-		usleep(100);
 		curr_time = get_time(philo->table);
 		elapsed = curr_time - start;
 		pthread_mutex_lock(&philo->table->dead_m);
@@ -35,6 +34,7 @@ bool	sleep_philo(t_philo *philo, long time_sleep)
 			return (false);
 		}
 		pthread_mutex_unlock(&philo->table->dead_m);
+		usleep(100);
 	}
 	return (true);
 }

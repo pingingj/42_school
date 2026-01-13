@@ -6,7 +6,7 @@
 /*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/12 18:31:42 by dgarcez-          #+#    #+#             */
-/*   Updated: 2025/08/12 18:53:47 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2025/08/13 13:56:05 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,13 @@ void	drop_forks(t_philo *philo)
 {
 	if (philo->id % 2 == 0)
 	{
-		pthread_mutex_unlock(philo->left_f);
 		pthread_mutex_unlock(philo->right_f);
+		pthread_mutex_unlock(philo->left_f);
 	}
 	else
 	{
-		pthread_mutex_unlock(philo->right_f);
 		pthread_mutex_unlock(philo->left_f);
+		pthread_mutex_unlock(philo->right_f);
 	}
 }
 
@@ -62,5 +62,30 @@ bool	philo_msg(t_philo *philo, char *msg, int msg_id)
 			if (!sleep_philo(philo, philo->table->time_eat * 2
 					- philo->table->time_sleep))
 				return (false);
+	return (true);
+}
+
+bool	init_mutexes(t_table *table)
+{
+	if (pthread_mutex_init(&table->print_m, NULL) != 0)
+	{
+		exit_msg(table, "Mutex init failed\n", 1, -1);
+		return (false);
+	}
+	if (pthread_mutex_init(&table->last_meal_m, NULL) != 0)
+	{
+		exit_msg(table, "Mutex init failed\n", 2, -1);
+		return (false);
+	}
+	if (pthread_mutex_init(&table->full_m, NULL) != 0)
+	{
+		exit_msg(table, "Mutex init failed\n", 3, -1);
+		return (false);
+	}
+	if (pthread_mutex_init(&table->dead_m, NULL) != 0)
+	{
+		exit_msg(table, "Mutex init failed\n", 4, -1);
+		return (false);
+	}
 	return (true);
 }

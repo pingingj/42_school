@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   creating.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daniel <daniel@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dgarcez- <dgarcez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 21:39:14 by daniel            #+#    #+#             */
-/*   Updated: 2025/08/13 01:59:01 by daniel           ###   ########.fr       */
+/*   Updated: 2025/08/13 13:43:24 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ static bool	check_vars(t_table *table, char **argv)
 			return (exit_msg(table, "Invalid amount to eat\n", 0, 0), false);
 	}
 	if (table->num_philos <= 0 || table->num_philos > INT_MAX)
-		return (exit_msg(table, "Invalid amount of philosophers\n", 0, 0), false);
+		return (exit_msg(table, "Invalid amount of philosophers\n", 0, 0),
+			false);
 	if (table->time_die <= 0 || table->time_die > INT_MAX)
 		return (exit_msg(table, "Invalid time to die\n", 0, 0), false);
 	if (table->time_eat <= 0 || table->time_eat > INT_MAX)
@@ -64,14 +65,8 @@ int	create_philos(t_table *table)
 	int	i;
 
 	i = 0;
-	if (pthread_mutex_init(&table->print_m, NULL) != 0)
-		return (exit_msg(table, "Mutex init failed\n", 1, -1), -1);
-	if (pthread_mutex_init(&table->last_meal_m, NULL) != 0)
-		return (exit_msg(table, "Mutex init failed\n", 2, -1), -1);
-	if (pthread_mutex_init(&table->full_m, NULL) != 0)
-		return (exit_msg(table, "Mutex init failed\n", 3, -1), -1);
-	if (pthread_mutex_init(&table->dead_m, NULL) != 0)
-		return (exit_msg(table, "Mutex init failed\n", 4, -1), -1);
+	if (init_mutexes(table) == false)
+		return (-1);
 	table->time_start = get_time(table);
 	while (i < table->num_philos)
 	{
@@ -93,7 +88,7 @@ int	create_philos(t_table *table)
 	return (1);
 }
 
-int		start_routine(t_table *table)
+int	start_routine(t_table *table)
 {
 	int			i;
 	pthread_t	tmonitor;
@@ -101,12 +96,14 @@ int		start_routine(t_table *table)
 	i = 0;
 	table->sim_run = true;
 	if (pthread_create(&tmonitor, NULL, monitor, table))
-		return (exit_msg(table, "Failed to create thread\n", 4, table->num_philos), -1);
+		return (exit_msg(table, "Failed to create thread\n", 4,
+				table->num_philos), -1);
 	while (i < table->num_philos)
 	{
 		if (pthread_create(&table->philos[i].thread, NULL, routine,
 				&table->philos[i]) != 0)
-			return (exit_msg(table, "Failed to create thread\n", 4, table->num_philos), -1);
+			return (exit_msg(table, "Failed to create thread\n", 4,
+					table->num_philos), -1);
 		i++;
 	}
 	i = 0;

@@ -6,7 +6,7 @@
 #    By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 15:45:43 by dgarcez-          #+#    #+#              #
-#    Updated: 2026/01/14 19:16:42 by dgarcez-         ###   ########.fr        #
+#    Updated: 2026/01/14 19:39:10 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = PhoneBook
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SOURCES =	PhoneBook.cpp Contact.cpp
+SOURCES =	main.cpp PhoneBook.cpp Contact.cpp
 
 SRCS_DIR = srcs
 SRCS =	$(addprefix $(SRCS_DIR)/, $(SOURCES))
@@ -28,7 +28,7 @@ all: $(NAME)
 $(NAME): $(OBJ_FILES)
 	$(CC) $(CFLAGS) $(OBJ_FILES) -o $(NAME)
 
-$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c | $(OBJS_DIR)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp | $(OBJS_DIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJS_DIR):

@@ -6,11 +6,11 @@
 /*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 18:17:28 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/01/14 18:35:16 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/01/14 19:43:26 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <../incs/Contact.hpp>
+#include "../incs/Contact.hpp"
 
 void	Contact::set_first_name(std::string str)
 {

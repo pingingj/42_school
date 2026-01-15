@@ -6,14 +6,14 @@
 #    By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 15:45:43 by dgarcez-          #+#    #+#              #
-#    Updated: 2026/01/14 19:39:10 by dgarcez-         ###   ########.fr        #
+#    Updated: 2026/01/14 22:47:04 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = PhoneBook
+NAME = phonebook
 
 CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98
+CFLAGS = -Wall -Wextra -Werror -g -std=c++98
 
 SOURCES =	main.cpp PhoneBook.cpp Contact.cpp
 

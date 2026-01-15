@@ -6,7 +6,7 @@
 #    By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/01/13 15:45:43 by dgarcez-          #+#    #+#              #
-#    Updated: 2026/01/14 22:47:04 by dgarcez-         ###   ########.fr        #
+#    Updated: 2026/01/15 03:45:27 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = phonebook
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98
 
-SOURCES =	main.cpp PhoneBook.cpp Contact.cpp
+SOURCES =	main.cpp PhoneBook.cpp Contact.cpp parse.cpp
 
 SRCS_DIR = srcs
 SRCS =	$(addprefix $(SRCS_DIR)/, $(SOURCES))

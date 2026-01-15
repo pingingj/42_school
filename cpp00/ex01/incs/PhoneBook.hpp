@@ -6,12 +6,13 @@
 /*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 15:49:05 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/01/14 22:39:54 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/01/15 03:46:29 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <iomanip>
+#include <cctype>
 
 class Contact
 {
@@ -44,12 +45,17 @@ class PhoneBook
 		Contact contacts[8];
 	public:
 		void	set_contact();
-		Contact	get_contact();
+		Contact	get_contact(int index);
 		void	search_phonebook();
+		void	prompt_index();
 		int		total;
 		int		index;
 };
 
 
-
-int		exit_phonebook();
+int			exit_phonebook();
+bool		validate_str(std::string input, bool (*func)(int));
+std::string	set_value(std::string prompt, bool (*func)(int));
+bool		is_alpha(int c);
+bool		is_digit(int c);
+bool		is_alphanum(int c);

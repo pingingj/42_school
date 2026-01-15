@@ -6,33 +6,19 @@
 /*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 18:38:29 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/01/14 23:52:44 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/01/15 03:46:44 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/PhoneBook.hpp"
 
-std::string	set_value(std::string prompt)
-{
-	std::string	input;
-
-	while(input.empty() && std::cin)
-	{
-		std::cout << prompt;
-		std::getline(std::cin, input);
-		if (!input.empty())
-			return (input);
-	}
-	return (input);
-}
-
 void	PhoneBook::set_contact()
 {
-	this->contacts[index].set_first_name(set_value("First name:"));
-	this->contacts[index].set_last_name(set_value("Last name:"));
-	this->contacts[index].set_nickname(set_value("Nickname:"));
-	this->contacts[index].set_number(set_value("Phone number:"));
-	this->contacts[index].set_dark_s(set_value("Darkest secret:"));
+	this->contacts[index].set_first_name(set_value("First name:", is_alpha));
+	this->contacts[index].set_last_name(set_value("Last name:", is_alpha));
+	this->contacts[index].set_nickname(set_value("Nickname:", is_alphanum));
+	this->contacts[index].set_number(set_value("Phone number:", is_digit));
+	this->contacts[index].set_dark_s(set_value("Darkest secret:", is_alphanum));
 	this->contacts[index].set_index(index);
 	if (total < 8)
 		total++;
@@ -41,14 +27,37 @@ void	PhoneBook::set_contact()
 		index = 0;
 }
 
-Contact	PhoneBook::get_contact()
+Contact	PhoneBook::get_contact(int index)
 {
 	std::cout << "First name:" << this->contacts[index].get_first_name() << std::endl;
-	std::cout << "Last name:" << this->contacts[index].get_first_name() << std::endl;
-	std::cout << "Nickname name:" << this->contacts[index].get_first_name() << std::endl;
-	std::cout << "Phone number:" << this->contacts[index].get_first_name() << std::endl;
-	std::cout << "Darkest secret:" << this->contacts[index].get_first_name() << std::endl;
+	std::cout << "Last name:" << this->contacts[index].get_last_name() << std::endl;
+	std::cout << "Nickname name:" << this->contacts[index].get_nickname() << std::endl;
+	std::cout << "Phone number:" << this->contacts[index].get_number() << std::endl;
+	std::cout << "Darkest secret:" << this->contacts[index].get_dark_s() << std::endl;
 	return (this->contacts[index]);
+}
+
+void	PhoneBook::prompt_index()
+{
+	std::string	input;
+	int			i;
+	
+	while(input.empty() && std::cin)
+	{
+		input = set_value("Choose an index:", NULL);
+		i = 0;
+		while (input[i])
+		{
+			if (std::isdigit(input[i]) == false || input[i] - '0' > total - 1)
+			{
+				std::cout << "Invalid index" << std::endl;
+				prompt_index();
+				return ;
+			}
+			i++;
+		}
+	}
+	get_contact(input[0] - '0');
 }
 
 void	PhoneBook::search_phonebook()
@@ -56,9 +65,15 @@ void	PhoneBook::search_phonebook()
 	int	i;
 
 	i = 0;
-	std::cout << std::setfill('_');
-	std::cout << std::setw(44) << "" << std::endl;
+	if (total == 0)
+	{
+		std::cout << "No contacts" << std::endl;
+		return ;
+	}
+	std::cout << std::setfill('-');
+	std::cout << std::setw(45) << "" << std::endl;
 	std::cout << std::setfill(' ');
+	std::cout << "|";
 	std::cout << std::setw(10) << "Index";
 	std::cout << "|";
 	std::cout << std::setw(10) << "First name";
@@ -67,14 +82,14 @@ void	PhoneBook::search_phonebook()
 	std::cout << "|";
 	std::cout << std::setw(10)  << "Nickname";
 	std::cout << "|"  << std::endl;
-	std::cout << std::setfill(' ');
 	while(i < total)
 	{
 		this->contacts[i].print_info();
 		i++;
 	}
-	std::cout << std::setfill('_');
-	std::cout << std::setw(44) << "|" << std::endl;
+	std::cout << std::setfill('-');
+	std::cout << std::setw(45) << "" << std::endl;
+	prompt_index();
 }
 
 int		exit_phonebook()

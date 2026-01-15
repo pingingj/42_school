@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/14 18:38:29 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/01/15 03:46:44 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:24:01 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ void	PhoneBook::prompt_index()
 			i++;
 		}
 	}
-	get_contact(input[0] - '0');
+	if (std::cin)
+		get_contact(input[0] - '0');
 }
 
 void	PhoneBook::search_phonebook()
@@ -90,6 +91,12 @@ void	PhoneBook::search_phonebook()
 	std::cout << std::setfill('-');
 	std::cout << std::setw(45) << "" << std::endl;
 	prompt_index();
+}
+
+PhoneBook::PhoneBook()
+{
+	this->total = 0;
+	this->index = 0;
 }
 
 int		exit_phonebook()

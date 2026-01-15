@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dgarcez- <dgarcez-@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/13 15:49:05 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/01/15 03:46:29 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/01/15 14:23:48 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,14 @@ class PhoneBook
 {
 	private:
 		Contact contacts[8];
+		int		total;
+		int		index;
 	public:
+		PhoneBook();
 		void	set_contact();
 		Contact	get_contact(int index);
 		void	search_phonebook();
 		void	prompt_index();
-		int		total;
-		int		index;
 };
 
 

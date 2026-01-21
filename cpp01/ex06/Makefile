@@ -5,17 +5,16 @@
 #                                                     +:+ +:+         +:+      #
 #    By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/01/20 18:51:49 by dgarcez-          #+#    #+#              #
-#    Updated: 2026/01/21 17:55:34 by dgarcez-         ###   ########.fr        #
+#    Created: 2026/01/21 18:27:02 by dgarcez-          #+#    #+#              #
+#    Updated: 2026/01/21 19:30:36 by dgarcez-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = sedisforlosers
-
+NAME = harlFilter
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98
 
-SOURCES = main.cpp
+SOURCES =	main.cpp Harl.cpp
 
 SRCS_DIR = srcs
 SRCS =	$(addprefix $(SRCS_DIR)/, $(SOURCES))
@@ -41,6 +40,3 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
-
-
-

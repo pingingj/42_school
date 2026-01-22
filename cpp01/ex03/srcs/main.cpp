@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:29:55 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/01/20 18:50:55 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:14:24 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int main()
 	Weapon	nuke("nuke");
 	Weapon	sword("sword");
 	HumanA	diogo("Diogo", wp);
-	diogo.attack();
 	HumanB	daniel("Daniel");
+	HumanB	ricardo("Ricardo", sword);
+	diogo.attack();
 	daniel.attack();
 	daniel.setWeapon(nuke);
 	daniel.attack();
-	HumanB	ricardo("Ricardo", sword);
 	ricardo.attack();
 	sword.setType("bazooka");
 	ricardo.attack();

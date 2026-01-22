@@ -6,13 +6,13 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 16:53:11 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/01/20 17:18:07 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:01:55 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incs/Weapon.hpp"
 
-const std::string&	Weapon::getType()
+const std::string&	Weapon::getType() const
 {
 	const std::string& str = this->type;
 	return (str);

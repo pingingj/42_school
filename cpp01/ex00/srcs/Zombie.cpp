@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/16 15:59:23 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/01/20 17:09:33 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/01/22 15:27:34 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	Zombie::announce(void)
 
 Zombie::Zombie()
 {
+	this->name = "Default";
 	std::cout << "Default Zombie constructed" << std::endl;
 }
 

@@ -6,7 +6,7 @@
 /*   By: dgarcez- < dgarcez-@student.42lisboa.com > +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 17:23:24 by dgarcez-          #+#    #+#             */
-/*   Updated: 2026/01/20 18:44:46 by dgarcez-         ###   ########.fr       */
+/*   Updated: 2026/01/22 14:58:16 by dgarcez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	HumanB::attack()
 void	HumanB::setWeapon(Weapon &weapon)
 {
 	this->weapon = &weapon;
-	std::cout << this->name << " has picked up a" << this->weapon->getType() << std::endl;
+	std::cout << this->name << " has picked up a " << this->weapon->getType() << std::endl;
 }
 
 HumanB::HumanB(std::string name, Weapon &weapon)
